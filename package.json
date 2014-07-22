@@ -1,0 +1,15 @@
+{
+  "name": "add1-heroku",
+  "version": "0.0.0",
+  "description": "A mental exercise",
+  "main": "web.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Steven Zhang",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.6.1",
+    "logfmt": "^1.1.2"
+  }
+}
