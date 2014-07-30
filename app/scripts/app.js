@@ -10,7 +10,8 @@
  */
 angular
   .module('add1App', [
-    'ui.router'
+    'ui.router',
+    'ui.bootstrap'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider

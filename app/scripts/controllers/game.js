@@ -14,6 +14,17 @@ angular.module('add1App')
   		var oldChain = [];
   		var uAns = [];
       var progressBarTime = 5000;
+      $scope.run = true;
+      $scope.progress = {
+      value: 0,
+      max: 100,
+      type: "danger"
+      };
+      $scope.progress2 = {
+        value: 0,
+        max: 100,
+        type: "danger"
+      };
   		$scope.numCorrect = 0;
 
   		// var tries = 1;
@@ -23,7 +34,7 @@ angular.module('add1App')
 			for(var i = 0; i<original.length; i++){
 				copy.push(original[i]);
 			}
-		};
+		};  
 
   	    var readAnswer = function(userAnswer){
   	    	if(!userAnswer){
@@ -69,13 +80,6 @@ angular.module('add1App')
   	    	}
   	    };
 
-        var destroyTimer = function() {
-          if(progressTimer){
-            clearInterval(progressTimer);
-            progressTimer = undefined;
-          }
-        };
-
         //Sets progress bar transition time
         var setTransitionTime = function() {
           $('.progress-bar').css({'-webkit-transition-duration': progressBarTime,
@@ -86,11 +90,19 @@ angular.module('add1App')
         //Called by init
         var setTimer = function() {
           setTransitionTime();
-          $scope.progress = 100;
-          console.log("setTimer " + $scope.progress);
+          $scope.progress.value = 100;
+          $scope.progress2.value = 100;
+          if($scope.run){
+            $scope.run = false;
+          }
+          else{
+            $scope.run = true;
+          }
+          // console.log($scope.progress.value);
         };
 
   	    var init = function(){
+          $scope.progress.value = 0;
 			for(var i = 0; i<4; i++){
   	    		numChain[i] = Math.floor((Math.random() * 10));
   	    	}
@@ -104,9 +116,10 @@ angular.module('add1App')
 			deepCopy(oldChain, numChain);
 		};
 
+    //initialize first
 		init();
 
-  	   	var routine = $interval(function() {
+  	 var routine = $interval(function() {
   	    	//process answer
 			readAnswer($scope.userAnswer);
 			if(!check(uAns, add1(oldChain))){
@@ -120,11 +133,10 @@ angular.module('add1App')
 				oldChain=[];
 				$scope.userAnswer='';
         progressBarTime -= 100;
-        $scope.progress = 0;
-        $('progress-bar').css('width', 0 + '%');
-
-  				init();
+        $scope.progress.value = 0;
+        $scope.progress2.value = 0;
+        //call init to run next number
+  			init();
   			}
-
-		}, 5000);
+		}, progressBarTime);
   });
