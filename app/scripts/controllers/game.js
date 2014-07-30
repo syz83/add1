@@ -10,9 +10,10 @@
 angular.module('add1App')
   .controller('GameCtrl', function ($scope, $interval) {
 
-  	  	var numChain = [0, 0, 0, 0];
+  	  var numChain = [0, 0, 0, 0];
   		var oldChain = [];
   		var uAns = [];
+      var progressBarTime = 5000;
   		$scope.numCorrect = 0;
 
   		// var tries = 1;
@@ -68,6 +69,27 @@ angular.module('add1App')
   	    	}
   	    };
 
+        var destroyTimer = function() {
+          if(progressTimer){
+            clearInterval(progressTimer);
+            progressTimer = undefined;
+          }
+        };
+
+        //Sets progress bar transition time
+        var setTransitionTime = function() {
+          $('.progress-bar').css({'-webkit-transition-duration': progressBarTime,
+       '-o-transition-duration': progressBarTime,
+          'transition-duration': progressBarTime});
+        };
+
+        //Called by init
+        var setTimer = function() {
+          setTransitionTime();
+          $scope.progress = 100;
+          console.log("setTimer " + $scope.progress);
+        };
+
   	    var init = function(){
 			for(var i = 0; i<4; i++){
   	    		numChain[i] = Math.floor((Math.random() * 10));
@@ -77,6 +99,8 @@ angular.module('add1App')
 			$scope.num2 = numChain[1];
 			$scope.num3 = numChain[2];
 			$scope.num4 = numChain[3];
+      //start progress bar timer
+      setTimer();
 			deepCopy(oldChain, numChain);
 		};
 
@@ -87,15 +111,18 @@ angular.module('add1App')
 			readAnswer($scope.userAnswer);
 			if(!check(uAns, add1(oldChain))){
 				destroyRoutine();
-				console.log(uAns);
-				console.log(numChain);
-				// TODO: print text that says score
+				// console.log(uAns);
+				// console.log(numChain);
 			}
 			else{
 				//reset oldChain
 				$scope.numCorrect++;
 				oldChain=[];
 				$scope.userAnswer='';
+        progressBarTime -= 100;
+        $scope.progress = 0;
+        $('progress-bar').css('width', 0 + '%');
+
   				init();
   			}
 
