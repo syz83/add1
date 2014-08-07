@@ -2,28 +2,28 @@
 
 /**
  * @ngdoc function
- * @name add1App.controller:MainCtrl
+ * @name add1App.controller:GameCtrl
  * @description
- * # MainCtrl
+ * # GameCtrl
  * Controller of the add1App
  */
 angular.module('add1App')
-  .controller('GameCtrl', function ($scope, $interval) {
+  .controller('GameCtrl', function ($scope, $interval, $modal, BoardService) {
 
   	  var numChain = [0, 0, 0, 0];
   		var oldChain = [];
   		var uAns = [];
+      var routineFirstHalf, routineSecondHalf;
       var progressBarTime = 5000;
+      var init;
       $scope.run = true;
       $scope.progress = {
       value: 0,
-      max: 100,
-      type: "danger"
+      type: 'success'
       };
       $scope.progress2 = {
         value: 0,
-        max: 100,
-        type: "danger"
+        type: 'success'
       };
   		$scope.numCorrect = 0;
 
@@ -47,15 +47,16 @@ angular.module('add1App')
 
   	    var add1 = function(nums){
   	    	var i;
+          var temp = [];
   	    	for(i = 0; i<nums.length; i++){
   	    		if(nums[i] === 9){
-  	    			nums[i] = 0;
+  	    			temp[i] = 0;
   	    		}
   	    		else{
-  	    			nums[i]++;
+  	    			temp[i] = nums[i] + 1;
   	    		}
   	    	}
-  	    	return nums;
+  	    	return temp;
   	    };
 
   	    var check = function(userAnswer, answer){
@@ -73,23 +74,25 @@ angular.module('add1App')
   	    	return true;
   	    };
 
-  	    var destroyRoutine = function() {
-  	    	if(routine){
-  	    		$interval.cancel(routine);
-  	    		routine = undefined;
-  	    	}
+  	    var destroyRoutine = function(isFirst) {
+          if(isFirst){
+  	       	if(routineFirstHalf){
+  	    	  	$interval.cancel(routineFirstHalf);
+  	    		  routineFirstHalf = undefined;
+              // console.log("destroy Routine 1");
+  	     	  }
+          }
+          else{
+            if(routineSecondHalf){
+              $interval.cancel(routineSecondHalf);
+              routineSecondHalf = undefined;
+              // console.log("destroy Routine 2");
+            }
+          }  
   	    };
-
-        //Sets progress bar transition time
-        var setTransitionTime = function() {
-          $('.progress-bar').css({'-webkit-transition-duration': progressBarTime,
-       '-o-transition-duration': progressBarTime,
-          'transition-duration': progressBarTime});
-        };
 
         //Called by init
         var setTimer = function() {
-          setTransitionTime();
           $scope.progress.value = 100;
           $scope.progress2.value = 100;
           if($scope.run){
@@ -101,8 +104,64 @@ angular.module('add1App')
           // console.log($scope.progress.value);
         };
 
-  	    var init = function(){
+    var createRoutine2 = function(){
+        routineSecondHalf = $interval(function() {
+            //process answer
+        readAnswer($scope.userAnswer);
+        if(!check(uAns, add1(oldChain))){
+          destroyRoutine(0);
+          // if($scope.numCorrect > BoardService.lowestRank().highscore){
+            //call modal
+            $modal.open({
+            templateUrl: '/templates/myModalContent.html',
+            controller: 'ModalCtrl',
+            size: 'lg'
+          });
+          // }
+          // console.log(uAns);
+          // console.log(numChain);
+        }
+        else{
+          //reset oldChain
+          $scope.numCorrect++;
+          oldChain=[];
+          $scope.userAnswer='';
           $scope.progress.value = 0;
+          $scope.progress2.value = 0;
+          //call init to run next number
+          destroyRoutine(0);
+          init();
+          }
+      }, progressBarTime/2);
+    };
+
+    var createRoutine1 = function(){
+        routineFirstHalf = $interval(function() {
+            //process answer
+        readAnswer($scope.userAnswer);
+        if(!check(uAns, add1(oldChain))){
+          //isFirst == 1 
+          destroyRoutine(1);
+          $scope.progress.type = 'danger';
+          $scope.progress2.type = 'danger';
+          createRoutine2();
+        }
+        else{
+          //reset oldChain
+          $scope.numCorrect+=2;
+          oldChain=[];
+          $scope.userAnswer='';
+          $scope.progress.value = 0;
+          $scope.progress2.value = 0;
+          //call init to run next number
+          init();
+          }
+      }, progressBarTime/2);
+    };
+
+  	 init = function(){
+      $scope.progress.type = 'success';
+      $scope.progress2.type = 'success';
 			for(var i = 0; i<4; i++){
   	    		numChain[i] = Math.floor((Math.random() * 10));
   	    	}
@@ -113,30 +172,13 @@ angular.module('add1App')
 			$scope.num4 = numChain[3];
       //start progress bar timer
       setTimer();
+      //start routineFirstHalf if hasn't been started before
+      if(!routineFirstHalf)
+        createRoutine1();
 			deepCopy(oldChain, numChain);
 		};
 
     //initialize first
 		init();
 
-  	 var routine = $interval(function() {
-  	    	//process answer
-			readAnswer($scope.userAnswer);
-			if(!check(uAns, add1(oldChain))){
-				destroyRoutine();
-				// console.log(uAns);
-				// console.log(numChain);
-			}
-			else{
-				//reset oldChain
-				$scope.numCorrect++;
-				oldChain=[];
-				$scope.userAnswer='';
-        progressBarTime -= 100;
-        $scope.progress.value = 0;
-        $scope.progress2.value = 0;
-        //call init to run next number
-  			init();
-  			}
-		}, progressBarTime);
   });

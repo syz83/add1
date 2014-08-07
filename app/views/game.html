@@ -2,14 +2,14 @@
     <h1>{{num1}}{{num2}}{{num3}}{{num4}}</h1>
 </div>
     <progressbar
-        class="progress" 
+        type="{{progress.type}}"
         max="100" 
         value="progress.value" 
         ng-if="run">
     </progressbar>
 
     <progressbar
-        class="progress" 
+        type="{{progress2.type}}"
         max="100" 
         value="progress2.value" 
         ng-if="!run">
@@ -23,7 +23,7 @@
             <input type="text" ng-model="userAnswer" maxlength="4" name="num_field">
           	</div>
             <div class="col-md-3">
-                <h3>Correct: {{numCorrect}}</h3>
+                <h3>Score: {{numCorrect}}</h3>
             </div>
         </div>
 </div>

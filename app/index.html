@@ -28,6 +28,7 @@
         <ul class="nav nav-pills pull-right">
           <li ui-sref-active="active"><a ui-sref="main">Home</a></li>
           <li ui-sref-active="active"><a ui-sref="about">About</a></li>
+          <li ui-sref-active="active"><a ui-sref="hall">Hall of Fame</a></li>
           <li ui-sref-active="active"><a ui-sref="donate">Donate</a></li>
         </ul>
         <!-- TODO: I would like to make this text change depending on the add setting -->
@@ -68,6 +69,7 @@
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -75,6 +77,9 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/game.js"></script>
+        <script src="scripts/controllers/hall.js"></script>
+        <script src="scripts/controllers/modal-ctrl.js"></script>
+        <script src="scripts/services.js"></script>
         <script src="directives.js"></script>
         <!-- endbuild -->
 </body>

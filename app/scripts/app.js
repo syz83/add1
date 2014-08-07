@@ -11,7 +11,8 @@
 angular
   .module('add1App', [
     'ui.router',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ngResource'
   ])
   .config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider
@@ -34,5 +35,10 @@ angular
                 url: '/game',
                 templateUrl: 'views/game.html',
                 controller: 'GameCtrl'
+            })
+            .state('hall', {
+                url: '/hall',
+                templateUrl: 'views/halloffame.html',
+                controller: 'HallCtrl'
             });
 });

@@ -1,0 +1,28 @@
+{
+  "name": "add1-heroku",
+  "version": "0.0.0",
+  "authors": [
+    "Steven Zhang <stevenzh2012@gmail.com>"
+  ],
+  "description": "A mental exercise",
+  "main": "app/index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": "~0.11.0",
+    "angular-ui-router": "~0.2.10",
+    "bootstrap": "~3.2.0",
+    "es5-shim": "~3.1.0",
+    "json3": "~3.3.1",
+    "pure": "~0.5.0",
+    "angular-resource": "~1.2.21"
+  }
+}
