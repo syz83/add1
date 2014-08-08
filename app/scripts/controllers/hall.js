@@ -8,6 +8,6 @@
  * Controller of the halloffame.html
  */
 angular.module('add1App')
-  .controller('HallCtrl', function ($scope, RankService, BoardService) {
+  .controller('HallCtrl', function ($scope, RankService) {
   	$scope.leaderboard = RankService.query();
   });

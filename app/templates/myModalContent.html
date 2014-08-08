@@ -4,7 +4,7 @@
             <p>Your score was good enough to get into the Hall of Fame where you will be honored for all eternity!</p>
             <p>Or at least until someone else beats you.</p>
             <alert ng-if="noname" type="danger">You forgot to enter your name, oh great one!</alert>
-            <input type="text" ng-model="rankName.text" maxlength="16" placeholder="Enter Name">
+            <input type="text" ng-model="rankData.name" maxlength="16" placeholder="Enter Name">
         </div>
         <div class="modal-footer">
             <button class="btn btn-primary" ng-click="ok()">OK</button>

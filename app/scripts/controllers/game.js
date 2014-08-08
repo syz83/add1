@@ -8,7 +8,7 @@
  * Controller of the add1App
  */
 angular.module('add1App')
-  .controller('GameCtrl', function ($scope, $interval, $modal, BoardService) {
+  .controller('GameCtrl', function ($scope, $interval, $modal) {
 
   	  var numChain = [0, 0, 0, 0];
   		var oldChain = [];

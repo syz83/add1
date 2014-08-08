@@ -7,7 +7,8 @@ var mongoose = require('mongoose');
 /* ================= REGISTER MODULES ===================== */
 
 app.use(logfmt.requestLogger());
-	
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 app.use(express.static(path.join(__dirname, 'app')));;
 
 /* ================= Connect to mongo database =============== */
