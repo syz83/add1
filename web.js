@@ -1,8 +1,9 @@
 var express = require("express");
+var app = express();
 var logfmt = require("logfmt");
 var path = require("path");
-var app = express();
 var mongoose = require('mongoose');
+bodyParser   = require('body-parser');
 
 /* ================= REGISTER MODULES ===================== */
 
