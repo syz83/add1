@@ -1,5 +1,6 @@
-.progress-bar {
+.progress .progress-bar {
   -webkit-transition: width 5s linear;
+  	 -moz-transition: width 5s linear;
        -o-transition: width 5s linear;
           transition: width 5s linear;
 }

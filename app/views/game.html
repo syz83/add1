@@ -5,14 +5,16 @@
         type="{{progress.type}}"
         max="100" 
         value="progress.value" 
-        ng-if="run">
+        ng-if="run"
+        animate="true">
     </progressbar>
 
     <progressbar
         type="{{progress2.type}}"
         max="100" 
         value="progress2.value" 
-        ng-if="!run">
+        ng-if="!run"
+        animate="true">
     </progressbar>
 
 <div class="well text-center">

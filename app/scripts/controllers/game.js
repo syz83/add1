@@ -16,6 +16,7 @@ angular.module('add1App')
       var routineFirstHalf, routineSecondHalf;
       var progressBarTime = 5000;
       var init;
+      var isFirst = 1;
       $scope.run = true;
       $scope.progress = {
       value: 0,
@@ -93,8 +94,10 @@ angular.module('add1App')
 
         //Called by init
         var setTimer = function() {
-          $scope.progress.value = 100;
-          $scope.progress2.value = 100;
+          setTimeout(function() {
+            $scope.progress.value = 100;
+            $scope.progress2.value = 100;
+          }, 0);
           if($scope.run){
             $scope.run = false;
           }
@@ -140,7 +143,7 @@ angular.module('add1App')
             //process answer
         readAnswer($scope.userAnswer);
         if(!check(uAns, add1(oldChain))){
-          //isFirst == 1 
+          isFirst = 0;
           destroyRoutine(1);
           $scope.progress.type = 'danger';
           $scope.progress2.type = 'danger';
