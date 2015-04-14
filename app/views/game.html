@@ -1,21 +1,24 @@
 <div class="jumbotron">
     <h1>{{num1}}{{num2}}{{num3}}{{num4}}</h1>
 </div>
-    <progressbar
-        type="{{progress.type}}"
+<!--     <progressbar
+        type="{{type1}}"
         max="100" 
-        value="progress.value" 
+        value="progress.value"
         ng-if="run"
         animate="true">
+        <span style="color:black; white-space:nowrap;">1 {{progress.value}}</span>
     </progressbar>
 
     <progressbar
-        type="{{progress2.type}}"
+        type="{{type2}}"
         max="100" 
-        value="progress2.value" 
+        value="value2"
         ng-if="!run"
         animate="true">
-    </progressbar>
+        <span style="color:black; white-space:nowrap;">2 {{value2}}</span>
+    </progressbar> -->
+    <div id="timer"></div>
 
 <div class="well text-center">
         <div class="row">

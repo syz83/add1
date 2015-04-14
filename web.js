@@ -11,7 +11,7 @@ app.use(logfmt.requestLogger());
 app.use(express.static(path.join(__dirname, 'app')));;
 
 /* ================= Connect to mongo database =============== */
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://add1:add1password123@ds061751.mongolab.com:61751/add1');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

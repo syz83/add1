@@ -4,3 +4,12 @@
        -o-transition: width 5s linear;
           transition: width 5s linear;
 }
+
+/*.timer {
+	background-color: grey;
+    width: 10%;
+    height: 25px;
+    padding: 0px;
+    border: 5px black;
+    margin-bottom: 25px;
+}*/
