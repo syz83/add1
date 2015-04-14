@@ -22,7 +22,7 @@ angular.module('add1App')
       $scope.time = 10;
       var initTime = 0,
       display = $('#timer');
-    display.text("Time Left: " + initTime);
+      display.text("Time Left: " + initTime);
       $scope.run = false;
       // $scope.progress = {
       // value: p1,
