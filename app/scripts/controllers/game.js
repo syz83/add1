@@ -142,8 +142,9 @@ function orderByScore(items, field, reverse) {
             //console.log(orderedhighscores[0]._id);
             $rootScope.score = $scope.totalPoints;
             $rootScope.average = $scope.average;
-            console.log("Call delete");
-            scoreBoard.delete({_id:orderedhighscores[0]._id});
+            //console.log("Call delete");
+            $rootScope.deleteUser = orderedhighscores[0]._id;
+            //scoreBoard.delete({_id:orderedhighscores[0]._id});
             //call modal
               $modal.open({
               templateUrl: '/templates/myModalContent.html',

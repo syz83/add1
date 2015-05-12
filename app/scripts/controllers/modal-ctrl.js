@@ -14,7 +14,6 @@ angular.module('add1App')
 	  	// $scope.$digest();
 	  	if(!$scope.rankName.text){
 	  		console.log($scope.rankName.text);
-	  		console.log("Hello");
 	  		$scope.noname = true;
 	  	}
 	  	else{
@@ -25,7 +24,9 @@ angular.module('add1App')
             	average: $rootScope.average
 	  		});
             console.log(newHighscore);
-            newHighscore.$save();
+            newHighscore.$save(function(){
+            	scoreBoard.delete({_id:$rootScope.deleteUser});
+            });
 	    	$modalInstance.close(true);
 	  	}
 	  };
