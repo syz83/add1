@@ -3,12 +3,15 @@ var logfmt = require("logfmt");
 var path = require("path");
 var app = express();
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
 /* ================= REGISTER MODULES ===================== */
 
 app.use(logfmt.requestLogger());
 	
-app.use(express.static(path.join(__dirname, 'app')));;
+app.use(express.static(path.join(__dirname, 'app')));
+
+app.use(bodyParser.json());
 
 /* ================= Connect to mongo database =============== */
 mongoose.connect('mongodb://add1:add1password123@ds061751.mongolab.com:61751/add1');

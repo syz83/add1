@@ -8,7 +8,7 @@
  * Controller of the myModalContent.html
  */
 angular.module('add1App')
-  .controller('ModalCtrl', function ($scope, $modalInstance) {
+  .controller('ModalCtrl', function ($scope, $modalInstance, scoreBoard, $rootScope) {
   	$scope.rankName = {};
 	  $scope.ok = function () {
 	  	// $scope.$digest();
@@ -19,6 +19,13 @@ angular.module('add1App')
 	  	}
 	  	else{
 	  		console.log($scope.rankName.text);
+	  		var newHighscore = new scoreBoard({
+            	name : $scope.rankName.text,
+            	highscore : $rootScope.score,
+            	average: $rootScope.average
+	  		});
+            console.log(newHighscore);
+            newHighscore.$save();
 	    	$modalInstance.close(true);
 	  	}
 	  };

@@ -1,3 +1,6 @@
-<ul class="list-group" ng-repeat="rank in leaderboard">
-  <li class="list-group-item">{{rank.place}}: {{rank.name}}<span class="badge">Score: {{rank.highscore}}</span></li>
+<div class="page-header">
+  <h1>Hall of Fame <small>Ranked by Score</small></h1>
+</div>
+<ul class="list-group" ng-repeat="score in scoreboard | orderObjectBy:'highscore':true">
+  <li class="list-group-item">{{$index + 1}}: {{score.name}}<span class="badge">Score: {{score.highscore}}</span><span class="badge">Average: {{score.average}}</span></li>
 </ul>

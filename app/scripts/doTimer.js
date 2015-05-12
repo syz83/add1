@@ -22,6 +22,7 @@ function doTimer(length, resolution, oninstance, oncomplete)
     }
 
     function destroy(){
+        console.log("Cleared Timeout");
         clearTimeout(currentTimeout);
     }
 
